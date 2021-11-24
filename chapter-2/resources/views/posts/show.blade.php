@@ -1,1 +1,2 @@
-<h1>Welcome To The Single Posts Page</h1>
+<h3>{{ $post->title }}</h3>
+<p>{{ $post->body }}</p>
