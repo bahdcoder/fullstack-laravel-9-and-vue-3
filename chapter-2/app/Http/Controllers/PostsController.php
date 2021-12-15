@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostsController extends Controller
 {
@@ -23,7 +25,13 @@ class PostsController extends Controller
     }
 
     public function create() {
-        return view('posts.create');
+        $tags = Tag::all();
+        $categories = Category::all();
+
+        return view('posts.create', [
+            'tags' => $tags,
+            'categories' => $categories
+        ]);
     }
 
     public function store() {
@@ -34,8 +42,13 @@ class PostsController extends Controller
         $post->title = $data['title'];
         $post->body = $data['body'];
         $post->slug = $data['title'];
+        $post->category_id = $data['category_id'];
 
         $post->save();
+
+        $tags = Tag::whereIn('id', $data['tags'])->get();
+
+        $post->tags()->attach($tags);
 
         return redirect()->route('posts.index');
     }

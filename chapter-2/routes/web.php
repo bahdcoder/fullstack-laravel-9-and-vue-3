@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PublishPostsController;
@@ -24,3 +25,5 @@ Route::patch('/posts/{post}/unpublish', [
 ])->name('posts.unpublish');
 Route::delete('/posts/{post}', [PostsController::class, 'destroy'])
     ->name('posts.delete');
+Route::get('/categories/{slug}/posts', [CategoriesController::class, 'show'])
+    ->name('categories.show');

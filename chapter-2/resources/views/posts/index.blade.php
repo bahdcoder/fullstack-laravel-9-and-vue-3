@@ -8,5 +8,7 @@
         @endif
     </a>
 
+    <p>Category: <a href="{{ route('categories.show', $post->category->slug) }}">{{ $post->category->name }}</a></p>
+
     <p>{{ $post->body }}</p>
 @endforeach

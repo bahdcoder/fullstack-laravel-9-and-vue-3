@@ -1,6 +1,11 @@
 <h3>{{ $post->title }}</h3>
 <p>{{ $post->body }}</p>
 
+@foreach($post->tags as $tag)
+    <b>{{ $tag->name }}</b>
+    <br />
+@endforeach
+
 <form action="{{ route('posts.publish', $post->id) }}" method="POST">
     @csrf
     @method('PATCH')
